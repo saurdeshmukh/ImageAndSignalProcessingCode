@@ -1,0 +1,19 @@
+function [e]=Loga_fun(x)
+[m,n]=size(x);
+z=fft2(x,m,n);
+subplot(2,2,1)
+imshow(x);
+title('Original Sample Image');
+subplot(2,2,2)
+imshow(z);
+title('FFT of Sample Image');
+c=abs(z);
+c=fftshift(c);
+subplot(2,2,3)
+imshow(c,[]);
+title('Abs of fft of Image with shift');
+d=0.1*log(1+c);
+e=mat2gray(d);
+subplot(2,2,4)
+imshow(e);
+title('o/p of Logarithmic function Image');

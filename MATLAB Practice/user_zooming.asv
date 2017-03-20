@@ -1,0 +1,25 @@
+function [y]=user_zooming(x)
+[m,n]=size(x);
+p=0;
+q=0;
+for i=m/4:()
+    for j=1:n
+        if ((mod((i+1),2)==0)&&(mod((j+1),2)==0))
+          y(i,j)=x((i+(m/4)-1+p),(j+(n/4)-1+q));
+        end
+    end
+end
+y = padarray(y,[2 2],0,'both');
+for i=1:m
+    for j=1:n
+        if ((mod((i),2)==0)&&(mod((j),2)==0))
+          sum=0;
+        for k=0:2
+            for l=0:2
+              sum=sum+(y(i+k,j+l));
+            end
+        end
+        y(i,j)=sum/9;
+        end
+    end
+end

@@ -1,0 +1,54 @@
+function [out]=Low_Pass(inp,D0)
+[M,N]=size(inp);
+inpp=inp(1:M,1:N);
+inpp(M+1:(2*M),N+1:(2*N))=0;
+subplot(2,3,1)
+imshow(inpp);
+title('Image With padding');
+for i=1:(2*M)
+    for j=1:(N*2)
+        inpp(i,j)=((-1)^(i+j))*inpp(i,j);
+    end
+end
+F=fft2((inpp));
+subplot(2,3,2)
+imshow(F);
+title('FFT of Image');
+
+for i=1:(2*M)
+    for j=1:(2*N)
+        D=sqrt(((i-M)^2)+((j-N)^2));
+        if D<D0
+            H(i,j)=255;
+        else
+            H(i,j)=0;
+        end
+    end
+end
+
+subplot(2,3,3)
+imshow(H);
+title('Low Pass Filter');
+G=F.*H;
+g=ifft2(G);
+
+subplot(2,3,4)
+imshow(g);
+title('IFFT of filtered image');
+
+for i=1:(2*M)
+    for j=1:(2*N)
+        g(i,j)=(real(g(i,j)))*((-1)^(i+j));
+    end
+end
+subplot(2,3,5)
+imshow(g);
+title('Shifted IFFT');
+out=g(1:(M),1:(N));
+subplot(2,3,6)
+imshow(mat2gray(out));
+title('Low Pass Filtered Image');
+
+ 
+
+

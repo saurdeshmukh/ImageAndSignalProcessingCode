@@ -1,0 +1,23 @@
+function [dct]=Form_Dictionary(str)
+i=1;
+l=length(str);
+for j=1:l
+    if(i==1)
+        dct{1,i}=i;
+        dct{2,i}=str(j);
+        i=i+1;
+    else
+        m=0;
+        for k=1:i
+            if (dct{2,k}==str(j))
+                m=m+1;
+            end
+        end
+        if i==m
+            dct{1,i}=i;
+            dct{2,i}=str(j);
+            i=i+1;
+        end
+    end
+end
+end

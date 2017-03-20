@@ -1,0 +1,26 @@
+clc;
+clear all;
+close all;
+im=imread('cameraman.tif');
+subplot(1,3,1);
+imshow(im);
+[m,n]=size(im);
+im1=padarray(im,[1 1]);
+
+for i=2:m
+    for j=2:n
+ y(i,j)=im1(i-1,j)+im1(i,j-1)+im1(i-1,j-1)+im1(i+1,j+1)-(4*im1(i,j));
+    end
+end
+y=uint8(y);
+subplot(1,3,2)
+imshow(y);
+for i=1:m
+    for j=1:n
+        z(i,j)=im1(i,j)-y(i,j);
+    end
+end
+z=uint8(z);
+subplot(1,3,3)
+imshow(z);
+        

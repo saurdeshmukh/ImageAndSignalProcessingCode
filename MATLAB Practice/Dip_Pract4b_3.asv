@@ -1,0 +1,5 @@
+function [out]=Uniform_Quantization(inp)
+[-Xml Xml]=[-10 10];
+M=8;
+s=(2*Xml)/M;
+intervals=-10:s:10

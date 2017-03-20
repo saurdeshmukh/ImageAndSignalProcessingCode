@@ -1,0 +1,27 @@
+function [out]=User_Dct(inp)
+[M,N]=size(inp);
+for u=1:M
+    for v=1:N
+        if u==1
+            f_u=1/sqrt(M);
+        else
+            f_u=sqrt(2/M);
+        end
+        if v==1
+            f_v=1/sqrt(N);
+        else
+            f_v=sqrt(2/N);
+        end
+        sum=0;
+        for i=1:M
+            for j=1:N
+                cs1=cos(((2*i-1)*(u-1)*pi)/(2*M));
+                cs2=cos(((2*j-1)*(v-1)*pi)/(2*N));
+              sum=sum+(inp(i,j)*cs1*cs2);
+            end
+         end
+      
+        out(u,v)=f_u*f_v*sum;
+    end
+    out=mat2gray(out);
+end
